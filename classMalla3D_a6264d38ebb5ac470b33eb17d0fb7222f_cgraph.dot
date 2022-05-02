@@ -1,0 +1,18 @@
+digraph "Malla3D::load_obj"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Malla3D::load_obj",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Load data of the mesh from an OBJ Wavefront file."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Malla3D::calc_centroid",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a818657957f0d56667383137acd5714e8",tooltip="Calculate centroid of mesh."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Malla3D::calc_distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98",tooltip="Calculate maximun distance from centroid."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Malla3D::calc_normals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26",tooltip="Calculate normals of mesh faces."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Malla3D::scale_to_unit",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ae9fd766758c7a3a259cbff6262355006",tooltip="Scale the mesh to the unit sphere."];
+  Node5 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

@@ -1,0 +1,47 @@
+digraph "main"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Malla3D::calculate\l_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9",tooltip="Calculate PANORAMA [extended] representation of the 3D mesh."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Malla3D::feature_map",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a53eb9ced89bed71cde349000139cecda",tooltip="Compute the feature map specified ."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Malla3D::get_orig",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ac1801ab429f5d4531a48016d8629efce",tooltip="Get origin of ray based on axis and height."];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Malla3D::filter_faces",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a7ea87c0adeb5a82ff56d04088c78688b",tooltip="Separates the faces of the mesh according to their height and sector."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Malla3D::get_height",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a01febaaa4fb630d6c3b62590ff740e51",tooltip="Get height of a division of the cylinder."];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Malla3D::get_sector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a1bce49b0d0ef934299b68cd8f29626f6",tooltip="Get sector of a point."];
+  Node2 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Malla3D::get_dir",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a6316e6fd15009373da175d7e8a7dd978",tooltip="Get direction of ray based on axis and angle."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="map_to_string",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5",tooltip="Convert enum Map to std::string c++ type."];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Malla3D::RayIntersectsTriangle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a16cfe88c11a5a9ab468833cc412b4ba3",tooltip="Compute Ray-Triangle Intersection using Möller-Trumbore algorithm."];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="combine_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$panorama_8h.html#ab9cb7d9782435f87679108334063f75d",tooltip="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation."];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="axis_to_string",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$aux_8h.html#afc31f23e1de37e57949b88b2da006122",tooltip="Convert enum Axis to std::string c++ type."];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="Malla3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a5be50fdc0d9130648c05451abdae00fb",tooltip="Export PANORAMA representation to a png image."];
+  Node13 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Malla3D::mesh_pose_norm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a2aecb9ccfffa78afc377bae14adbea83",tooltip="Compute the angle that normalize pose of 3d mesh."];
+  Node14 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="Malla3D::compute_panorama\l_symetry",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ac01f122da2498b91c843ae328f557ea1",tooltip="Computes symetry function of PANORAMA representation."];
+  Node14 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="Malla3D::rotate_mesh",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d",tooltip="Rotate the mesh."];
+  Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="Malla3D::calc_distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98",tooltip="Calculate maximun distance from centroid."];
+  Node16 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="Malla3D::calc_normals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26",tooltip="Calculate normals of mesh faces."];
+}

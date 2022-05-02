@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{newunicodechar}
+  \newunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \newunicodechar{²}{${}^{2}$}% Superscript two
+  \newunicodechar{³}{${}^{3}$}% Superscript three
+
+\pagestyle{empty}
+\begin{document}
+$ S(I) = max\{Sym(w) | w \in 1:width\} $
+\pagebreak
+
+$ Sym(w) = 1 - \frac{1}{2m} \sum_{h=\frac{height}{2}-m}^{h=\frac{height}{2}-+m} SymDiff(w,h) $
+\pagebreak
+
+$ SymDiff(w,h) = \frac{1}{n} \sum_{x=1}^n |(w-x,h) - (w+x,h)| $
+\pagebreak
+
+\end{document}
