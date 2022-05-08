@@ -8,7 +8,7 @@ digraph "main"
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="Malla3D::calculate\l_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9",tooltip="Calculate PANORAMA [extended] representation of the 3D mesh."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="Malla3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197",tooltip="Export PANORAMA representation to a png image."];
+  Node3 [label="Malla3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197",tooltip="Export PANORAMA representation to sdm , ndm or gndm."];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node4 [label="Malla3D::feature_map",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3",tooltip="Compute the feature map specified ."];
   Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -34,7 +34,7 @@ digraph "main"
   Node14 [label="Malla3D::concat_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a9485ecd9e591a9c98f39dd51c94b0970",tooltip="Concatenation PANORAMA feature maps SDM and NDM."];
   Node14 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node15 [label="Malla3D::get_name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad0766a8459b60817a673b2ff6425d189",tooltip=" "];
+  Node15 [label="Malla3D::get_name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad0766a8459b60817a673b2ff6425d189",tooltip="Get model's name."];
   Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node16 [label="Malla3D::mesh_pose_norm",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ae5af4cfebe85c90d999a78d5bb95b4ad",tooltip="Compute the angle that normalize pose of 3d mesh."];
   Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

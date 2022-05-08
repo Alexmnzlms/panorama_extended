@@ -10,7 +10,7 @@ digraph "Malla3D::mesh_pose_norm"
   Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Malla3D::calculate\l_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a62a468f594ed9248bfb756207d79bca9",tooltip="Calculate PANORAMA [extended] representation of the 3D mesh."];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="Malla3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197",tooltip="Export PANORAMA representation to a png image."];
+  Node4 [label="Malla3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad15e8de3e89c77f8dde51dc62084d197",tooltip="Export PANORAMA representation to sdm , ndm or gndm."];
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node5 [label="Malla3D::feature_map",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#af31e0135d4e38023e1cb13784247c7d3",tooltip="Compute the feature map specified ."];
   Node3 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
