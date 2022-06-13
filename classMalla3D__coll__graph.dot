@@ -1,7 +1,0 @@
-digraph "Malla3D"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{Malla3D\n|- vertexs\l- facesIndex\l- facesIndex_filter\l- panorama\l- panorama_extended\l- normals\l- centroid\l- d_max\l- height\l- radius\l- B\l- sdm\l- ndm\l- gndm\l- name\l|+ Malla3D()\l+ Malla3D()\l+ ~Malla3D()\l+ get_name()\l+ export_obj()\l+ rotate_mesh()\l+ calculate_panorama()\l+ mesh_pose_norm()\l+ combine_panorama()\l+ concat_panorama()\l+ concat_panorama()\l- calc_normals()\l- calc_centroid()\l- calc_distance()\l- scale_to_unit()\l- load_obj()\l- RayIntersectsTriangle()\l- get_orig()\l- get_dir()\l- get_height()\l- get_sector()\land 8 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class contains the information about the 3D model."];
-}
