@@ -37,11 +37,13 @@ digraph "main"
   Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node15 [label="Malla3D::get_name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ad0766a8459b60817a673b2ff6425d189",tooltip="Get model's name."];
   Node1 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node16 [label="Malla3D::rotate_mesh",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d",tooltip="Rotate the mesh."];
-  Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node17 [label="Malla3D::calc_distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98",tooltip="Calculate maximun distance from centroid."];
-  Node16 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node18 [label="Malla3D::calc_normals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26",tooltip="Calculate normals of mesh faces."];
-  Node1 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node19 [label="Malla3D::set_name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ae85de41c2a0e3446316bd930d7d6d0de",tooltip="Set model's name."];
+  Node16 [label="Malla3D::num_vertexs",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#accdb2eea13f38e0e433f6b856fb83c87",tooltip="Get number of 3D models' vertex."];
+  Node1 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="Malla3D::rotate_mesh",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a16fdfd8b127a8f5795a8d2b5f9bd996d",tooltip="Rotate the mesh."];
+  Node17 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="Malla3D::calc_distance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#aa737de641d8f52b3e5e764bbade4aa98",tooltip="Calculate maximun distance from centroid."];
+  Node17 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="Malla3D::calc_normals",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#a5e89df2d0021683c8815b42d3219fe26",tooltip="Calculate normals of mesh faces."];
+  Node1 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="Malla3D::set_name",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMalla3D.html#ae85de41c2a0e3446316bd930d7d6d0de",tooltip="Set model's name."];
 }
