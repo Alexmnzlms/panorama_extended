@@ -1,0 +1,36 @@
+digraph "panorama"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="panorama",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Mesh3D::calculate_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a0a984cd43ac240bc77aedaa564824fbb",tooltip="Calculate PANORAMA [extended] representation of the 3D mesh."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Mesh3D::export_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a2b2c5e6a2bc74dae6e2f033f402ab5f5",tooltip="Export PANORAMA representation to sdm , ndm or gndm."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Mesh3D::feature_map",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#afbf78c4b5703f84162afa3e89faad9cb",tooltip="Compute the feature map specified ."];
+  Node2 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Mesh3D::filter_faces",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a8cfc87c76eed8c2e11c14f87d2e2788a",tooltip="Separates the faces of the mesh according to their height and sector."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Mesh3D::get_height",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#ac1f0f4c6d293fcaef2b3b049a9b6d410",tooltip="Get height of a division of the cylinder."];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Mesh3D::get_sector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a7c3b28ac2fd72eb6baa373117e483ba3",tooltip="Get sector of a point."];
+  Node2 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Mesh3D::get_dir",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a3bef9be7ab66d7007f7d0c2dafd78430",tooltip="Get direction of ray based on axis and angle."];
+  Node2 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Mesh3D::get_orig",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a26d29a9bbd2d5e4c83deeab8bf6f7288",tooltip="Get origin of ray based on axis and height."];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="map_to_string",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$aux_8h.html#aee40fe119b557ef2e8c1b596fd28c0b5",tooltip="Convert enum Map to std::string c++ type."];
+  Node2 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Mesh3D::RayIntersectsTriangle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#afae60cf7754feb072082d08d46660609",tooltip="Compute Ray-Triangle Intersection using Möller-Trumbore algorithm."];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Mesh3D::combine_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#abcfbcc10775544bcf4c5d1d706dd23b5",tooltip="Combine PANORAMA feature maps SDM, NDM and GNDM in PANORAMA extended representation."];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="axis_to_string",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$aux_8h.html#afc31f23e1de37e57949b88b2da006122",tooltip="Convert enum Axis to std::string c++ type."];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Mesh3D::concat_panorama",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh3D.html#a5d8447c5025429061006dd3fb2d4632b",tooltip="Concatenation PANORAMA feature maps SDM and NDM."];
+  Node14 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
