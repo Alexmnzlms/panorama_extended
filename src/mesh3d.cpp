@@ -25,16 +25,17 @@ Mesh3D::Mesh3D(){
  * Constructor calls load_obj() function to load de mesh data and store model's name.
  * @param name string containing model's name
  * @param path string containing the relative path to the 3D model to be loaded
+ * @param color TO DO
  * @see load_obj()
  */
-Mesh3D::Mesh3D(const std::string name, const std::string path){
+Mesh3D::Mesh3D(const std::string name, const std::string path, bool color){
 	for(int i = 0; i < 3; i++){
 		cv::Mat aux;
 		sdm.push_back(aux);
 		ndm.push_back(aux);
 		gndm.push_back(aux);
 	}
-	load_obj(path);
+	load_obj(path, color);
 	this->name = name;
 }
 
@@ -237,7 +238,7 @@ void Mesh3D::rotate_mesh(Axis axis_rot, float angle){
  * @return bool Indicates whether the read was successful (true) or unsuccessful (false)
  * @see [OBJ Wavefront specification](http://paulbourke.net/dataformats/obj/)
  */
-bool Mesh3D::load_obj(const std::string path){
+bool Mesh3D::load_obj(const std::string path, bool color){
 	std::vector< unsigned int > vertexIndices;
 	std::vector< glm::vec3 > temp_vertices;
 	std::ifstream file;
@@ -261,6 +262,9 @@ bool Mesh3D::load_obj(const std::string path){
 			file >> vertex.y;
 			file >> vertex.z;
 			vertexs.push_back(vertex);
+			if(color){
+				vertexColor.push_back({0, 0, 0});
+			}
 		} else if (header == "f"){
 			std::string vertex1, vertex2, vertex3;
 			std::vector<int> vertexIndex;
@@ -296,12 +300,17 @@ bool Mesh3D::load_obj(const std::string path){
  * @brief Export mesh data to OBJ Wavefront file
  * @param path string containing the path where you will export the model to
  */
-void Mesh3D::export_obj(const std::string path){
+void Mesh3D::export_obj(const std::string path, bool color){
 	std::ofstream file;
 	file.open(path);
 
 	for(int i = 0; i < vertexs.size(); i++){
-		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << std::endl;
+		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << " ";
+		if(color){
+			file << vertexColor[i][0] << " " << vertexColor[i][1] << " " << vertexColor[i][2] << std::endl;
+		} else {
+			file << std::endl;
+		}
 	}
 
 	for(int j = 0; j < facesIndex.size(); j++){
@@ -1230,3 +1239,123 @@ void Mesh3D::concat_panorama(Map map, std::string output, bool resize){
 	}
 	
 }
+/** @brief
+ * 
+ * 
+*/
+void Mesh3D::color_3d_model(std::string image_path){
+	cv::Mat img_orig = cv::imread(image_path, cv::IMREAD_COLOR);
+	cv::Mat img = img_orig.colRange(0,360);
+	std::vector<cv::Mat> three_channels;
+	cv::split(img,three_channels);
+
+	// Now I can access each channel separately
+	// for(int i=0; i<img.rows; i++){
+	// 	for(int j=0; j<img.cols; j++){
+	// 		int red = static_cast<int>(three_channels[0].at<uint8_t>(i,j));
+	// 		int green = static_cast<int>(three_channels[1].at<uint8_t>(i,j));
+	// 		int blue = static_cast<int>(three_channels[2].at<uint8_t>(i,j));
+	// 		// std::cout << red << " " << green << " " << blue << std::endl;
+	// 	}	
+		// std::cout << std::endl;
+	// }
+
+	// std::cout << three_channels[0] << std::endl;
+
+	if(vertexs.size() > 0){
+
+		Axis axis = Y;
+
+		std::chrono::steady_clock::time_point begin;
+		std::chrono::steady_clock::time_point end;
+		begin = std::chrono::steady_clock::now();
+		
+		glm::vec3 direction;
+		glm::vec3 origin;
+
+		int n_colisiones = 0;
+
+		std::vector<glm::vec3> colisiones;
+		std::vector<int> face_hit;
+
+		filter_faces(Y, 1);
+
+		end = std::chrono::steady_clock::now();
+		std::cout << "Face filtering"
+		<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
+
+		begin = std::chrono::steady_clock::now();
+
+		for(float v = 0; v < B; v++){
+
+			for(float u = 0; u < 2*B; u++){
+
+				double red = (double) (static_cast<int>(three_channels[0].at<uint8_t>(u,v)) / 255.0);
+				double green = (double) (static_cast<int>(three_channels[1].at<uint8_t>(u,v)) / 255.0);
+				double blue = (double) (static_cast<int>(three_channels[2].at<uint8_t>(u,v)) / 255.0);
+				std::cout << u << " " << v << " " << red << " " << green << " " << blue << std::endl;
+				float angle = u*2*M_PI / (2*B);
+				std::cout << angle << std::endl;
+				int s = get_sector(angle) - 1;
+
+				origin = get_orig(axis,v,1);
+				direction = get_dir(axis,angle);
+
+				for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
+					glm::vec3 hit_point;
+					glm::vec2 hit;
+					float dist;
+
+					glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
+					glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
+					glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
+
+					if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
+						n_colisiones++;
+						colisiones.push_back(hit_point);
+						face_hit.push_back(facesIndex_filter[v][s][j]);
+					} 
+				}
+				
+				if(n_colisiones > 0){
+					// panorama[v][u] = feature_map(map, axis, precision, power, origin, direction, colisiones, face_hit);
+					float dist;
+					float dist_max = -1;
+					float ind_max = -1;
+
+					for(int c = 0; c < colisiones.size(); c++){ 
+						dist = glm::distance(colisiones[c],origin); 
+						if((dist > dist_max) && (dist > 0)){
+							ind_max = c;
+							dist_max = dist;
+						}
+					}
+
+					std::cout << "COLISION " << face_hit[ind_max] << " " << colisiones[ind_max].x << " " << colisiones[ind_max].y << " " << colisiones[ind_max].y << std::endl;
+					auto vertex_index = facesIndex[face_hit[ind_max]];
+					vertexColor[vertex_index[0]][0] += red;
+					vertexColor[vertex_index[0]][1] += green;
+					vertexColor[vertex_index[0]][2] += blue;
+					vertexColor[vertex_index[1]][0] += red;
+					vertexColor[vertex_index[1]][1] += green;
+					vertexColor[vertex_index[1]][2] += blue;
+					vertexColor[vertex_index[2]][0] += red;
+					vertexColor[vertex_index[2]][1] += green;
+					vertexColor[vertex_index[2]][2] += blue;
+
+				} else {
+					std::cout << "NO COLISION" << std::endl;
+				}
+				
+				n_colisiones = 0;
+				colisiones.clear();
+				face_hit.clear();
+			}
+		}	
+	}
+
+	// cv::imshow("Windows", three_channels[1]);
+	// cv::waitKey();
+}
+
+
