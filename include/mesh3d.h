@@ -94,7 +94,7 @@ private:
 	 * 
 	 * Is set by default to 180 divisions
 	 */
-	int B = 1800;
+	int B = 180;
 	/**
 	 * @brief SDM feature map
 	 */
