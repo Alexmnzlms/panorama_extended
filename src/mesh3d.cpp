@@ -307,7 +307,19 @@ void Mesh3D::export_obj(const std::string path, bool color){
 	for(int i = 0; i < vertexs.size(); i++){
 		file << "v " << vertexs[i][0] << " " << vertexs[i][1] << " " << vertexs[i][2] << " ";
 		if(color){
-			file << vertexColor[i][0] << " " << vertexColor[i][1] << " " << vertexColor[i][2] << std::endl;
+			double red = vertexColor[i][0];
+			if(red > 1.0){
+				red = 1.0;
+			}
+			double green = vertexColor[i][1];
+			if(green > 1.0){
+				green = 1.0;
+			}
+			double blue = vertexColor[i][2];
+			if(blue > 1.0){
+				blue = 1.0;
+			}
+			file << red << " " << green << " " << blue << std::endl;
 		} else {
 			file << std::endl;
 		}
@@ -1249,6 +1261,11 @@ void Mesh3D::color_3d_model(std::string image_path){
 	std::vector<cv::Mat> three_channels;
 	cv::split(img,three_channels);
 
+	cv::Mat img_resize;
+	cv::resize(img,img_resize,cv::Size(3*B,B));
+	// cv::imshow("Window",img_resize);
+	// cv::waitKey();
+
 	// Now I can access each channel separately
 	// for(int i=0; i<img.rows; i++){
 	// 	for(int j=0; j<img.cols; j++){
@@ -1278,7 +1295,7 @@ void Mesh3D::color_3d_model(std::string image_path){
 		std::vector<glm::vec3> colisiones;
 		std::vector<int> face_hit;
 
-		filter_faces(Y, 1);
+		filter_faces(axis, 1);
 
 		end = std::chrono::steady_clock::now();
 		// std::cout << "Face filtering"
@@ -1291,9 +1308,13 @@ void Mesh3D::color_3d_model(std::string image_path){
 
 			for(float u = 0; u < 2*B; u++){
 
-				int red = static_cast<int>(three_channels[0].at<uint8_t>(v,u));
+				int red = static_cast<int>(three_channels[2].at<uint8_t>(v,u));
 				int green = static_cast<int>(three_channels[1].at<uint8_t>(v,u));
-				int blue = static_cast<int>(three_channels[2].at<uint8_t>(v,u));
+				int blue = static_cast<int>(three_channels[1].at<uint8_t>(v,u));
+				int gray = static_cast<int>(img_resize.at<uint8_t>(v,u));
+				red = gray;
+				blue = gray;
+				green = gray;
 				// std::cout << u << " " << v << " " << red << " " << green << " " << blue << std::endl;
 				float angle = u*2*M_PI / (2*B);
 				// std::cout << angle << std::endl;
@@ -1303,21 +1324,21 @@ void Mesh3D::color_3d_model(std::string image_path){
 				direction = get_dir(axis,angle);
 
 				if(red != 0 || blue != 0 || green != 0){
-					for(int j = 0; j < facesIndex.size(); j++){
+					for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
 						glm::vec3 hit_point;
 						glm::vec2 hit;
 						float dist;
 
 						// std::cout << facesIndex[j][0] << " " << facesIndex[j][1] << " " << facesIndex[j][2] << std::endl;
 
-						glm::vec3 t1 = vertexs[facesIndex[j][0]];
-						glm::vec3 t2 = vertexs[facesIndex[j][1]];
-						glm::vec3 t3 = vertexs[facesIndex[j][2]];
+						glm::vec3 t1 = vertexs[facesIndex[facesIndex_filter[v][s][j]][0]];
+						glm::vec3 t2 = vertexs[facesIndex[facesIndex_filter[v][s][j]][1]];
+						glm::vec3 t3 = vertexs[facesIndex[facesIndex_filter[v][s][j]][2]];
 
 						if(RayIntersectsTriangle(origin, direction, t1, t2, t3, hit_point)){
 							n_colisiones++;
 							colisiones.push_back(hit_point);
-							face_hit.push_back(j);
+							face_hit.push_back(facesIndex_filter[v][s][j]);
 						} 
 						}
 				
@@ -1341,15 +1362,15 @@ void Mesh3D::color_3d_model(std::string image_path){
 						// std::cout << face_hit[ind_max] << std::endl;
 						auto vertex_index = facesIndex[face_hit[ind_max]];
 						// std::cout << vertex_index[0] << " " << vertex_index[1] << " " << vertex_index[2] << std::endl;
-						vertexColor[vertex_index[0]][0] += (double)(red/255.0);
-						vertexColor[vertex_index[0]][1] += (double)(green/255.0);
-						vertexColor[vertex_index[0]][2] += (double)(blue/255.0);
-						vertexColor[vertex_index[1]][0] += (double)(red/255.0);
-						vertexColor[vertex_index[1]][1] += (double)(green/255.0);
-						vertexColor[vertex_index[1]][2] += (double)(blue/255.0);
-						vertexColor[vertex_index[2]][0] += (double)(red/255.0);
-						vertexColor[vertex_index[2]][1] += (double)(green/255.0);
-						vertexColor[vertex_index[2]][2] += (double)(blue/255.0);
+						vertexColor[vertex_index[0]][0] = (double)(red/255.0);
+						vertexColor[vertex_index[0]][1] = (double)(green/255.0);
+						vertexColor[vertex_index[0]][2] = (double)(blue/255.0);
+						vertexColor[vertex_index[1]][0] = (double)(red/255.0);
+						vertexColor[vertex_index[1]][1] = (double)(green/255.0);
+						vertexColor[vertex_index[1]][2] = (double)(blue/255.0);
+						vertexColor[vertex_index[2]][0] = (double)(red/255.0);
+						vertexColor[vertex_index[2]][1] = (double)(green/255.0);
+						vertexColor[vertex_index[2]][2] = (double)(blue/255.0);
 
 					} else {
 						// std::cout << "NO COLISION" << std::endl;
