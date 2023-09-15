@@ -21,9 +21,9 @@ void panorama(Mesh3D& malla, std::string output_folder_pe, std::string output_fo
 	malla.combine_panorama(Y,output_folder_pe,false);
 	malla.combine_panorama(Z,output_folder_pe,false);
 
-	malla.concat_panorama(SDM,output_folder_fm,false);
-	malla.concat_panorama(NDM,output_folder_fm,false);
-	malla.concat_panorama(GNDM,output_folder_fm,false);
+	// malla.concat_panorama(SDM,output_folder_fm,false);
+	// malla.concat_panorama(NDM,output_folder_fm,false);
+	// malla.concat_panorama(GNDM,output_folder_fm,false);
 }
 
 int main(int argc, char * argv[]) {
