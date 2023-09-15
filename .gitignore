@@ -15,3 +15,6 @@ PANORAMA/*
 *.png
 !docs/html/*.png
 *.obj
+pubis_data_proc
+pubis_data_proc_25
+*.zip
