@@ -1,5 +1,6 @@
 #ifndef MALLA3D_H_INCLUDED
 #define MALLA3D_H_INCLUDED
+#define GLM_ENABLE_EXPERIMENTAL
 #include <fstream>
 #include <cstdio>
 #include <stdio.h>
@@ -64,7 +65,7 @@ public:
 	void combine_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Axis axis, std::string output, bool resize = true);
 	void concat_panorama(Map map, std::string output,  bool resize = true);
-	void color_3d_model(std::string image_path);
+	void color_3d_model(std::string image_path, Axis axis, double threshold);
 						
 private:
 	/** @brief Vertexs of the mesh */

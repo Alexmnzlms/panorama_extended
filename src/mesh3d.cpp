@@ -263,7 +263,7 @@ bool Mesh3D::load_obj(const std::string path, bool color){
 			file >> vertex.z;
 			vertexs.push_back(vertex);
 			if(color){
-				vertexColor.push_back({0, 0, 0});
+				vertexColor.push_back({0.0, 0.0, 0.0});
 			}
 		} else if (header == "f"){
 			std::string vertex1, vertex2, vertex3;
@@ -1255,7 +1255,7 @@ void Mesh3D::concat_panorama(Map map, std::string output, bool resize){
  * 
  * 
 */
-void Mesh3D::color_3d_model(std::string image_path){
+void Mesh3D::color_3d_model(std::string image_path, Axis axis, double threshold){
 	cv::Mat img_orig = cv::imread(image_path, cv::IMREAD_GRAYSCALE);
 	// cv::Mat img = img_orig.colRange(0,72);
 	cv::Mat img = img_orig;
@@ -1284,8 +1284,6 @@ void Mesh3D::color_3d_model(std::string image_path){
 	// std::cout << three_channels[0] << std::endl;
 
 	if(vertexs.size() > 0){
-
-		Axis axis = Y;
 
 		std::chrono::steady_clock::time_point begin;
 		std::chrono::steady_clock::time_point end;
@@ -1326,6 +1324,8 @@ void Mesh3D::color_3d_model(std::string image_path){
 
 				origin = get_orig(axis,v,1);
 				direction = get_dir(axis,angle);
+				// std::cout << "Origin: " << origin[0] << " " << origin[1] << " " << origin[2] << std::endl;
+				// std::cout << "Direction: " << direction[0] << " " << direction[1] << " " << direction[2] << std::endl;
 
 				if(gray != 0){
 					for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
@@ -1367,17 +1367,41 @@ void Mesh3D::color_3d_model(std::string image_path){
 						auto vertex_index = facesIndex[face_hit[ind_max]];
 						// std::cout << vertex_index[0] << " " << vertex_index[1] << " " << vertex_index[2] << std::endl;
 						// std::cout << "gray value: " << gray << std::endl;
-						double true_color = (gray - 127.5) / 127.5;
+						// double true_color = (gray - 127.5) / 127.5;
+						double true_color = gray / 255.0;
 						// std::cout << "true_color: " << true_color << std::endl;
-						double red_value = 0.0;
-						double green_value = 0.0;
-						double blue_value = 0.0;
+						// double red_value = 0.25;
+						// double green_value = 0.25;
+						// double blue_value = 0.25;
+						double red_value = 0;
+						double green_value = 0;
+						double blue_value = 0;
 
-						if (true_color < -0.05){
-							blue_value = 1.0; //* true_color;
-						} else if (true_color > 0.05) {
-							red_value = 1.0;// * true_color;
-						} 
+						// if (true_color < -0.05){
+						// 	blue_value = 1.0; //* true_color;
+						// } else if (true_color > 0.05) {
+						// 	red_value = 1.0;// * true_color;
+						// }
+						
+						// switch (axis)
+						// {
+						// case X:
+						// 	red_value = 0.75 * true_color + 0.25;
+						// 	break;
+
+						// case Y:
+						// 	green_value = 0.75 * true_color + 0.25;
+						// 	break;
+
+						// case Z:
+						// 	blue_value = 0.75 * true_color + 0.25;
+						// 	break;
+						// }
+
+						if (true_color >= threshold){
+							red_value = true_color;
+							// red_value = 0.75 * true_color + 0.25;
+						}
 
 						vertexColor[vertex_index[0]][0] = red_value;
 						vertexColor[vertex_index[0]][1] = green_value;
