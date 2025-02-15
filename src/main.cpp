@@ -21,9 +21,9 @@ void panorama(Mesh3D& malla, std::string output_folder_pe, std::string output_fo
 	malla.combine_panorama(Y,output_folder_pe,false);
 	malla.combine_panorama(Z,output_folder_pe,false);
 
-	malla.concat_panorama(SDM,output_folder_fm,false);
-	malla.concat_panorama(NDM,output_folder_fm,false);
-	malla.concat_panorama(GNDM,output_folder_fm,false);
+	// malla.concat_panorama(SDM,output_folder_fm,false);
+	// malla.concat_panorama(NDM,output_folder_fm,false);
+	// malla.concat_panorama(GNDM,output_folder_fm,false);
 }
 
 int main(int argc, char * argv[]) {
@@ -52,6 +52,8 @@ int main(int argc, char * argv[]) {
 		std::string rot_name = malla.get_name() + "_0";
 		std::string orig_name = malla.get_name();
 		malla.set_name(rot_name);
+
+		panorama(malla,output_folder_pe,output_folder_fm);
 
 		// malla.mesh_pose_norm();
 
@@ -97,7 +99,8 @@ int main(int argc, char * argv[]) {
 		panorama(malla_z1,output_folder_pe,output_folder_fm);
 		panorama(malla_z2,output_folder_pe,output_folder_fm);
 
-		panorama(malla,output_folder_pe,output_folder_fm);
+		// std::cout << "Exporting in " << output_folder_pe+"prueba.obj" << std::endl;
+		// malla.export_obj(output_folder_pe+"prueba.obj");
 
 		
 		for(int i = 0; i < 3; i++){

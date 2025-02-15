@@ -788,12 +788,16 @@ void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 		}
 
 		for(float v = 0; v < (B/precision); v++){
+		// for(float v = (B/precision) - 1; v >= 0; v--){
 
 			for(float u = 0; u < 2*(B/precision); u++){
-				float angle = u*2*M_PI / (2*(B/precision));
+			// for(float u = 2*(B/precision) - 1; u >= 0 ; u--){
+				float angle = (u*2*M_PI / (2*(B/precision)));
+				// float angle = 2*M_PI - (u*2*M_PI / (2*(B/precision)));
 				int s = get_sector(angle) - 1;
 
 				origin = get_orig(axis,v,precision);
+				// std::cout << "v " << origin.x << " " << origin.y << " " << origin.z << std::endl;
 				direction = get_dir(axis,angle);
 
 				for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
@@ -841,7 +845,8 @@ void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 		std::cout << "Map: " <<  map_to_string(map)
 		<< "\t Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "[ms]" << std::endl;
 
-		export_panorama(map,axis,"");
+		// export_panorama(map,axis,"");
+		export_panorama(map,axis,true);
 	}
 }
 
