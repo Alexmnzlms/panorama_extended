@@ -787,6 +787,24 @@ void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 			panorama_extended.push_back(row_ext);
 		}
 
+		std::ofstream file;
+
+		switch (axis)
+		{
+		case X:
+			file.open("prueba_X.obj");
+			break;
+		
+		case Y:
+			file.open("prueba_Y.obj");
+			break;
+
+		case Z:
+			file.open("prueba_Z.obj");
+			break;
+		}
+		
+
 		for(float v = 0; v < (B/precision); v++){
 
 			for(float u = 0; u < 2*(B/precision); u++){
@@ -795,6 +813,9 @@ void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 
 				origin = get_orig(axis,v,precision);
 				direction = get_dir(axis,angle);
+
+				file << "v " << origin[0] << " " << origin[1] << " " << origin[2] << std::endl;
+				file << "v " << origin[0] + direction[0] << " " << origin[1] + direction[1] << " " << origin[2] + direction[2] << std::endl;
 
 				for(int j = 0; j < facesIndex_filter[v][s].size(); j++){
 					glm::vec3 hit_point;
@@ -822,6 +843,8 @@ void Mesh3D::calculate_panorama(Map map, Axis axis, float precision, int power){
 			}
 			
 		}
+
+		file.close();
 
 		for(int i = 0; i < panorama.size(); i++){
 			for(int j = 0; j < panorama[i].size(); j++){

@@ -1,5 +1,7 @@
 #ifndef MALLA3D_H_INCLUDED
 #define MALLA3D_H_INCLUDED
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <fstream>
 #include <cstdio>
 #include <stdio.h>
