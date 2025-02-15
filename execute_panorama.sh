@@ -1,27 +1,46 @@
-if [[ $# -ne 2 ]]; then
-    printf "ERROR: Need two arguments.\n"
-    printf "\tUsage: $0 <input_folder> <output_folder>\n"
-    exit 1
+#!/bin/bash
+
+source_folder=$1
+output_folder=$2
+
+if [ "$#" -ne 2 ]; then
+    echo "Wrong number of params"
+    echo "./execute_panorama source_folder output_folder"
+    exit
 fi
 
-make -B
-mkdir -p $2
-mkdir -p $2/logs
+num_processes=14
+num_jobs=0
 
-obj_files=`find $1 -type f | grep ".obj"`
+start=$(date +%s)
+for folder in $source_folder/*; do
+    case_number=`echo $folder | awk -F "/" '{print $2}'`
+    # echo $case_number
 
-split=`echo "${obj_files[@]}"|xargs -n80`
+    for file in $source_folder/$case_number/*; do
+        file_name=`echo $file | awk -F "/" '{print $3}'`
+        laterality=`echo $file_name | awk -F "_" '{print $2}'`
+        echo $file_name
+        output=$output_folder/$case_number\_$laterality/
+        if [[ ! -d $output ]]; then
+            mkdir -p $output
+            bin/panorama_extended $case_number\_$laterality $file $output $output > logs/$file_name.log &
+            num_jobs=$((num_jobs+1))
+        else
+            echo "Skipping folder $output"
+        fi
+    done
 
-for s in $split; do
-  echo "split: ${s}"
+    if [[ $num_jobs -ge $num_processes ]]; then
+        echo "Reached $num_jobs processes. Waitng..."
+        wait
+        end=$(date +%s)
+        echo "Elapsed Time: $(($end-$start)) seconds"
+        num_jobs=0
+    fi
+
 done
 
-# for file in $obj_files; do
-#     echo $file
-#     file_name=`echo $file | awk 'BEGIN{FS="/"} {print $NF}' | awk 'BEGIN{FS="."} {print $1}'`
-#     echo $file_name
-#     mkdir -p $2/$file_name/
-#     bin/panorama_extended $file_name $file $2/$file_name/ $2/$file_name/ &> $2/logs/${file_name}.log
-# done
+wait
 
-# poweroff
+poweroff
